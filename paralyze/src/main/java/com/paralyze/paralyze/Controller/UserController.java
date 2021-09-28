@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.logging.Logger;
 
 @RestController
-@RequestMapping("api/v1/users")
+@RequestMapping("/api/v1/users")
 public class UserController {
     //private static final Logger log = (Logger) LoggerFactory.getLogger(UserController.class);
 
