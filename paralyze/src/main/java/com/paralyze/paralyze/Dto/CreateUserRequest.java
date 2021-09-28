@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateUserRequest {
-    private long id;
+    private long userId;
     private String userName;
     private String displayName;
     private String password;
@@ -17,7 +17,7 @@ public class CreateUserRequest {
     @Override
     public String toString() {
         return "CreateUserRequest{" +
-                "id=" + id +
+                "id=" + userId +
                 ", userName='" + userName + '\'' +
                 ", displayName='" + displayName + '\'' +
                 ", password='" + password + '\'' +

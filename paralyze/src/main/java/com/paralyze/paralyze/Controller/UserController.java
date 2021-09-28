@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 @RestController
 @RequestMapping("api/v1/users")
 public class UserController {
-    private static final Logger log = (Logger) LoggerFactory.getLogger(UserController.class);
+    //private static final Logger log = (Logger) LoggerFactory.getLogger(UserController.class);
 
     UserService userService;
     public UserController(UserService userService){
@@ -20,7 +20,7 @@ public class UserController {
     }
     @PostMapping("/signup")
     public ResponseEntity<UserDto> saveUser(@RequestBody CreateUserRequest createUserRequest){
-        log.info(createUserRequest.toString());
+        Logger.getLogger(createUserRequest.toString());
         return ResponseEntity.
                 ok(this.userService.createUser(createUserRequest));
     }

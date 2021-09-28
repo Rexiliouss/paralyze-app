@@ -18,11 +18,11 @@ public class UserService {
         this.userDtoConverter=userDtoConverter;
     }
     public UserDto createUser(CreateUserRequest createUserRequest){
-        User user = new User(createUserRequest.getId(),
+        User user = new User(createUserRequest.getUserId(),
                 createUserRequest.getUserName(),
                 createUserRequest.getDisplayName(),
                 createUserRequest.getPassword());
-        return userDtoConverter.converter(userRepository.save(user));
+        return userDtoConverter.converter(this.userRepository.save(user));
     }
 
     public User findUserById(Long id){
