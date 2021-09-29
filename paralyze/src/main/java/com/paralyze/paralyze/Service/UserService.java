@@ -8,6 +8,9 @@ import com.paralyze.paralyze.Model.User;
 import com.paralyze.paralyze.Repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class UserService {
     UserRepository userRepository;
@@ -24,10 +27,9 @@ public class UserService {
                 createUserRequest.getPassword());
         return userDtoConverter.converter(this.userRepository.save(user));
     }
-
-    public User findUserById(Long id){
-        return userRepository.findById(id).
-                orElseThrow(()->new UserNotFoundException("Kullanıcı Bulunamadı"));
+    public List<UserDto> findAllUsers(){
+        return userRepository.findAll().
+                stream().map(x -> userDtoConverter.converter(x)).collect(Collectors.toList());
     }
 
 

@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 @RestController
@@ -24,5 +25,11 @@ public class UserController {
         Logger.getLogger(createUserRequest.toString());
         return ResponseEntity.
                 ok(this.userService.createUser(createUserRequest));
+    }
+    @GetMapping("/allusers")
+    public ResponseEntity<List<UserDto>> findAllUsers(){
+        Logger.getLogger("Tüm kullanıcılar Listeleniyor.");
+        return ResponseEntity
+                .ok(this.userService.findAllUsers());
     }
 }
