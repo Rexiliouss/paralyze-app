@@ -21,11 +21,14 @@ public class UserController {
         this.userService=userService;
     }
     @PostMapping("/signup")
+
+    //Kullanıcı kaydetme işlemi
     public ResponseEntity<UserDto> saveUser(@RequestBody CreateUserRequest createUserRequest){
         Logger.getLogger(createUserRequest.toString());
         return ResponseEntity.
                 ok(this.userService.createUser(createUserRequest));
     }
+    //Tüm kullanıcıları listele
     @GetMapping("/allusers")
     public ResponseEntity<List<UserDto>> findAllUsers(){
         Logger.getLogger("Tüm kullanıcılar Listeleniyor.");
