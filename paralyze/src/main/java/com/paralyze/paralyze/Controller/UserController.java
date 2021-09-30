@@ -3,7 +3,7 @@ package com.paralyze.paralyze.Controller;
 import com.paralyze.paralyze.Dto.CreateUserRequest;
 import com.paralyze.paralyze.Dto.UserDto;
 import com.paralyze.paralyze.Service.UserService;
-import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,8 +20,9 @@ public class UserController {
     public UserController(UserService userService){
         this.userService=userService;
     }
-    @PostMapping("/signup")
 
+    @PostMapping("/signup")
+    @ResponseStatus(HttpStatus.OK)
     //Kullanıcı kaydetme işlemi
     public ResponseEntity<UserDto> saveUser(@RequestBody CreateUserRequest createUserRequest){
         Logger.getLogger(createUserRequest.toString());

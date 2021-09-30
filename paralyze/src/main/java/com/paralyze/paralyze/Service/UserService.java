@@ -16,6 +16,8 @@ public class UserService {
     UserRepository userRepository;
     UserDtoConverter userDtoConverter;
 
+    PasswordEncoder passwordEncoder;
+
     public UserService(UserRepository userRepository,UserDtoConverter userDtoConverter){
         this.userRepository=userRepository;
         this.userDtoConverter=userDtoConverter;
