@@ -13,16 +13,15 @@ import java.util.logging.Logger;
 @RestController
 @RequestMapping("/api/v1/users")
 public class UserController {
-    //private static final Logger log = (Logger) LoggerFactory.getLogger(UserController.class);
 
     UserService userService;
     public UserController(UserService userService){
         this.userService=userService;
     }
 
+    //Kullanıcı kaydetme işlemi
     @PostMapping("/signup")
     @ResponseStatus(HttpStatus.OK)
-    //Kullanıcı kaydetme işlemi
     public ResponseEntity<UserDto> saveUser(@RequestBody CreateUserRequest createUserRequest){
         Logger.getLogger(createUserRequest.toString());
         return ResponseEntity.
