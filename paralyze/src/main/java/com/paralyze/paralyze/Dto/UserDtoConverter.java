@@ -1,6 +1,7 @@
 package com.paralyze.paralyze.Dto;
 
 import com.paralyze.paralyze.Model.User;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -11,5 +12,6 @@ public class UserDtoConverter {
                 from.getDisplayName(),
                 from.getPassword()
         );
+
     }
 }

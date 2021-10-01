@@ -17,7 +17,6 @@ public class CreateUserRequest {
     @Override
     public String toString() {
         return "CreateUserRequest{" +
-                "id=" + userId +
                 ", userName='" + userName + '\'' +
                 ", displayName='" + displayName + '\'' +
                 ", password='" + password + '\'' +

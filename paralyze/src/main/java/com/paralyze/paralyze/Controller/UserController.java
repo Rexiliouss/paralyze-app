@@ -3,7 +3,6 @@ package com.paralyze.paralyze.Controller;
 import com.paralyze.paralyze.Dto.CreateUserRequest;
 import com.paralyze.paralyze.Dto.UserDto;
 import com.paralyze.paralyze.Service.UserService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,24 +12,24 @@ import java.util.logging.Logger;
 @RestController
 @RequestMapping("/api/v1/users")
 public class UserController {
+    private UserService userService;
 
-    UserService userService;
     public UserController(UserService userService){
         this.userService=userService;
     }
-
-    //Kullanıcı kaydetme işlemi
+    //User Creator
     @PostMapping("/signup")
-    @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<UserDto> saveUser(@RequestBody CreateUserRequest createUserRequest){
+    public ResponseEntity<Object> saveUser(@RequestBody CreateUserRequest createUserRequest){
         Logger.getLogger(createUserRequest.toString());
-        if(createUserRequest.getUserName()==null || createUserRequest.getUserName().isEmpty()){
-
+        //Kullanıcı adı boş ise BadRequest gönder, kaydı ekleme.
+        if (createUserRequest.getUserName().isEmpty() || createUserRequest.getUserName()==""){
+            return ResponseEntity.badRequest().body("Tüm Bilgiler Eksiksiz Doldurulmalıdır.");
+        }else{
+            return ResponseEntity.
+                    ok(this.userService.createUser(createUserRequest));
         }
-        return ResponseEntity.
-                ok(this.userService.createUser(createUserRequest));
     }
-    //Tüm kullanıcıları listele
+    //List All users
     @GetMapping("/allusers")
     public ResponseEntity<List<UserDto>> findAllUsers(){
         Logger.getLogger("Tüm kullanıcılar Listeleniyor.");

@@ -10,13 +10,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @Service
 public class UserService {
-    UserRepository userRepository;
-    UserDtoConverter userDtoConverter;
+    private UserRepository userRepository;
+    private UserDtoConverter userDtoConverter;
 
 
     public UserService(UserRepository userRepository,UserDtoConverter userDtoConverter){
@@ -30,7 +29,6 @@ public class UserService {
                     createUserRequest.getDisplayName(),
                     passwordEncoder.encode(createUserRequest.getPassword()));
             return userDtoConverter.converter(this.userRepository.save(user));
-
     }
 
 
