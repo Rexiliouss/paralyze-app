@@ -24,6 +24,9 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<UserDto> saveUser(@RequestBody CreateUserRequest createUserRequest){
         Logger.getLogger(createUserRequest.toString());
+        if(createUserRequest.getUserName()==null || createUserRequest.getUserName().isEmpty()){
+
+        }
         return ResponseEntity.
                 ok(this.userService.createUser(createUserRequest));
     }

@@ -24,13 +24,13 @@ public class UserService {
         this.userDtoConverter=userDtoConverter;
     }
     public UserDto createUser(CreateUserRequest createUserRequest){
-        PasswordEncoder passwordEncoder= new BCryptPasswordEncoder();
-        User user = new User(createUserRequest.getUserId(),
-                createUserRequest.getUserName(),
-                createUserRequest.getDisplayName(),
-                passwordEncoder.encode(createUserRequest.getPassword()));
+            PasswordEncoder passwordEncoder= new BCryptPasswordEncoder();
+            User user = new User(createUserRequest.getUserId(),
+                    createUserRequest.getUserName(),
+                    createUserRequest.getDisplayName(),
+                    passwordEncoder.encode(createUserRequest.getPassword()));
+            return userDtoConverter.converter(this.userRepository.save(user));
 
-        return userDtoConverter.converter(this.userRepository.save(user));
     }
 
 
