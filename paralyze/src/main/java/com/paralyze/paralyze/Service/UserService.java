@@ -1,10 +1,11 @@
 package com.paralyze.paralyze.Service;
 
 import com.paralyze.paralyze.Dto.CreateUserRequest;
-import com.paralyze.paralyze.Dto.UserDto;
 import com.paralyze.paralyze.Dto.UserDtoConverter;
 import com.paralyze.paralyze.Model.User;
 import com.paralyze.paralyze.Repository.UserRepository;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -22,20 +23,31 @@ public class UserService {
         this.userRepository=userRepository;
         this.userDtoConverter=userDtoConverter;
     }
-    public UserDto createUser(CreateUserRequest createUserRequest){
-            PasswordEncoder passwordEncoder= new BCryptPasswordEncoder();
-            User user = new User(createUserRequest.getUserId(),
+    //User Creator
+    //Gelen bilgilerden herhangi bir tanesi boş ise BadRequest döndür.
+    //Değilse OK döndür.
+    public Object createUser(CreateUserRequest createUserRequest){
+        if (createUserRequest.getUserName().isEmpty()
+                || createUserRequest.getUserName().trim()==""
+                || createUserRequest.getPassword().isEmpty()
+                || createUserRequest.getPassword().trim()==""
+                || createUserRequest.getDisplayName().isEmpty()
+                || createUserRequest.getDisplayName().trim()==""){
+            HttpHeaders headers = new HttpHeaders();
+            headers.add("Validation Error","Tüm Alanlar Doldurulmalıdır.");
+            return ResponseEntity.badRequest().headers(headers).body("Doldur");
+        }
+        else{
+        PasswordEncoder passwordEncoder= new BCryptPasswordEncoder();
+        User user = new User(createUserRequest.getUserId(),
                     createUserRequest.getUserName(),
                     createUserRequest.getDisplayName(),
                     passwordEncoder.encode(createUserRequest.getPassword()));
-            return userDtoConverter.converter(this.userRepository.save(user));
+            return ResponseEntity.ok(userDtoConverter.converter(this.userRepository.save(user)));}
     }
-
-
-    public List<UserDto> findAllUsers(){
+    //Tüm kullanıcıları Listeler.
+    public List<Object> findAllUsers(){
         return userRepository.findAll().
                 stream().map(x -> userDtoConverter.converter(x)).collect(Collectors.toList());
     }
-
-
 }

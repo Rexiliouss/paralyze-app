@@ -3,6 +3,7 @@ package com.paralyze.paralyze.Dto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.http.ResponseEntity;
 
 @AllArgsConstructor
 @NoArgsConstructor
