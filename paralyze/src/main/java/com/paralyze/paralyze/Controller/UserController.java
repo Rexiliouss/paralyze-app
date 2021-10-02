@@ -21,8 +21,14 @@ public class UserController {
     @PostMapping("/signup")
     public ResponseEntity<Object> saveUser(@RequestBody CreateUserRequest createUserRequest){
         Logger.getLogger(createUserRequest.toString());
-        //Kullanıcı adı boş ise BadRequest gönder, kaydı ekleme.
-        if (createUserRequest.getUserName().isEmpty() || createUserRequest.getUserName()==""){
+        //KullanıcıAdı, Parola boş ise BadRequest gönder, kaydı ekleme.
+        if
+          (createUserRequest.getUserName().isEmpty()
+        || createUserRequest.getUserName()==""
+        || createUserRequest.getPassword().isEmpty()
+        || createUserRequest.getPassword()==""
+        || createUserRequest.getDisplayName().isEmpty()
+        || createUserRequest.getDisplayName()==""){
             return ResponseEntity.badRequest().body("Tüm Bilgiler Eksiksiz Doldurulmalıdır.");
         }else{
             return ResponseEntity.
