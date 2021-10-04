@@ -25,26 +25,27 @@ public class UserService {
         this.userRepository=userRepository;
         this.userDtoConverter=userDtoConverter;
     }
-    public ResponseEntity<UserDto> createUser(CreateUserRequest createUserRequest){
-        if(createUserRequest.getUserName()=="" || createUserRequest.getUserName().isEmpty()){
+    public ResponseEntity<UserDto> createUser(CreateUserRequest createUserRequest) {
+        if (createUserRequest.getUserName() == "" || createUserRequest.getUserName().isEmpty()) {
             HttpHeaders headers = new HttpHeaders();
-            headers.add("Validation Error","Tüm değerleri doldurunuz.");
-            ResponseEntity.badRequest().headers(headers).build();
-            
+            headers.add("Validation Error", "Tüm değerleri doldurunuz.");
+            return ResponseEntity
+                    .badRequest()
+                    .headers(headers).build();
         }
-            PasswordEncoder passwordEncoder= new BCryptPasswordEncoder();
-            User user = new User(createUserRequest.getUserId(),
-                    createUserRequest.getUserName(),
-                    createUserRequest.getDisplayName(),
-                    passwordEncoder.encode(createUserRequest.getPassword()));
-            return ResponseEntity.ok(userDtoConverter.converter(this.userRepository.save(user)));
-
+        else{
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        User user = new User(createUserRequest.getUserId(),
+                createUserRequest.getUserName(),
+                createUserRequest.getDisplayName(),
+                passwordEncoder.encode(createUserRequest.getPassword()));
+        return ResponseEntity.ok(userDtoConverter.converter(this.userRepository.save(user)));
+        }
     }
 
-
-    public List<UserDto> findAllUsers(){
-        return userRepository.findAll().
-                stream().map(x -> userDtoConverter.converter(x)).collect(Collectors.toList());
+    public ResponseEntity<List<UserDto>> findAllUsers(){
+        return ResponseEntity.ok(userRepository.findAll().
+                stream().map(x -> userDtoConverter.converter(x)).collect(Collectors.toList()));
     }
 
 
