@@ -5,14 +5,11 @@ import com.paralyze.paralyze.Dto.UserDto;
 import com.paralyze.paralyze.Dto.UserDtoConverter;
 import com.paralyze.paralyze.Model.User;
 import com.paralyze.paralyze.Repository.UserRepository;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,8 +28,8 @@ public class UserService {
                 createUserRequest.getUserName(),
                 createUserRequest.getDisplayName(),
                 passwordEncoder.encode(createUserRequest.getPassword()));
+        System.out.println("Sisteme Kayıt Yapıldı");
         return userDtoConverter.converter(this.userRepository.save(user));
-
     }
 
     public List<UserDto> findAllUsers(){

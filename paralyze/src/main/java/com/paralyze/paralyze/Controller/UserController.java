@@ -7,12 +7,12 @@ import com.paralyze.paralyze.Service.UserService;
 import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/api/v1/users")
@@ -24,21 +24,18 @@ public class UserController {
     }
     //User Creator
     @PostMapping("/signup")
-    public ResponseEntity<Object> saveUser(@RequestBody CreateUserRequest createUserRequest){
-        if(createUserRequest.getUserName().isEmpty() || createUserRequest.getUserName().trim()==""
-        || createUserRequest.getDisplayName().isEmpty() || createUserRequest.getDisplayName().trim()==""
-        || createUserRequest.getPassword().isEmpty() || createUserRequest.getPassword().trim()==""){
-            Map<String,String> validationErrors = new HashMap<>();
-            validationErrors.put("error","Tüm alanları giriniz");
-            ControllerExceptionHandler apiError = new ControllerExceptionHandler(400,"Validation-Error","/api/v1/users/signup",validationErrors);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiError);
-        }else{
-            return ResponseEntity.ok(this.userService.createUser(createUserRequest));
-        }
+    public ControllerExceptionHandler saveUser(@Validated @RequestBody CreateUserRequest createUserRequest){
+        ControllerExceptionHandler controllerExceptionHandler = new ControllerExceptionHandler(400,"Validation Error","/api/v1/users/signup");
+        Map<String,String> validationErrors = new HashMap<>();
+
+        this.userService.createUser(createUserRequest);
+        return new ControllerExceptionHandler(200,"Kullanıcı Oluşturuldu");
     }
     //List All users
     @GetMapping("/allusers")
     public ResponseEntity<List<UserDto>> findAllUsers(){
         return ResponseEntity.ok(this.userService.findAllUsers());
     }
+
+
 }
