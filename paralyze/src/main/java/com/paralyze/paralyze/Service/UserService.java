@@ -25,27 +25,19 @@ public class UserService {
         this.userRepository=userRepository;
         this.userDtoConverter=userDtoConverter;
     }
-    public ResponseEntity<UserDto> createUser(CreateUserRequest createUserRequest) {
-        if (createUserRequest.getUserName() == "" || createUserRequest.getUserName().isEmpty()) {
-            HttpHeaders headers = new HttpHeaders();
-            headers.add("Validation Error", "Tüm değerleri doldurunuz.");
-            return ResponseEntity
-                    .badRequest()
-                    .headers(headers).build();
-        }
-        else{
+    public UserDto createUser(CreateUserRequest createUserRequest) {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         User user = new User(createUserRequest.getUserId(),
                 createUserRequest.getUserName(),
                 createUserRequest.getDisplayName(),
                 passwordEncoder.encode(createUserRequest.getPassword()));
-        return ResponseEntity.ok(userDtoConverter.converter(this.userRepository.save(user)));
-        }
+        return userDtoConverter.converter(this.userRepository.save(user));
+
     }
 
-    public ResponseEntity<List<UserDto>> findAllUsers(){
-        return ResponseEntity.ok(userRepository.findAll().
-                stream().map(x -> userDtoConverter.converter(x)).collect(Collectors.toList()));
+    public List<UserDto> findAllUsers(){
+        return userRepository.findAll().
+                stream().map(x -> userDtoConverter.converter(x)).collect(Collectors.toList());
     }
 
 
