@@ -23,12 +23,10 @@ public class UserController {
 
     //User Creator
     @PostMapping("/signup")
-    public ResponseEntity<?> saveUser(@Valid @RequestBody CreateUserRequest createUserRequest){
-        try{
+    public ResponseEntity<Object> saveUser(@Valid @RequestBody CreateUserRequest createUserRequest){
+
             return ResponseEntity.ok(this.userService.createUser(createUserRequest));
-        }catch (Error exception){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ControllerException(400,"Kullanıcı oluşturulamadı.","/api/v1/users/signup"));
-        }
+
     }
 
     //List All users

@@ -10,7 +10,6 @@ import org.jetbrains.annotations.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateUserRequest {
-    @NotNull
     private long userId;
     @NotNull("Username cannot be null")
     private String userName;
