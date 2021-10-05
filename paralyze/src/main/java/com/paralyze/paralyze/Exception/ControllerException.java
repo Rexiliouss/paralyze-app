@@ -1,32 +1,19 @@
 package com.paralyze.paralyze.Exception;
 
 import lombok.Data;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 
-import java.time.ZonedDateTime;
+import java.util.Date;
 
 @Data
-@ControllerAdvice
 public class ControllerException extends RuntimeException{
+    private int status;
     private String message;
-    private Throwable throwable;
-    private HttpStatus httpStatus;
-    private ZonedDateTime timestamp;
+    private long timestamp = new Date().getTime();
+    private String path;
 
-    public ControllerException(String message) {
-        super(message);
-    }
-
-    public ControllerException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    public ResponseEntity<Object> handleControllerRequestException(String message, Throwable throwable, HttpStatus httpStatus){
+    public ControllerException(int status, String message, String path){
+        this.status=status;
         this.message=message;
-        this.throwable=throwable;
-        this.httpStatus=httpStatus;
-        this.timestamp=ZonedDateTime.now();
+        this.path=path;
     }
 }
