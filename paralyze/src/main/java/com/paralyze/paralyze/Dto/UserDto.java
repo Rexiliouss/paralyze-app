@@ -10,13 +10,9 @@ import org.springframework.http.ResponseEntity;
 @NoArgsConstructor
 @Getter
 public class UserDto {
-    @NotNull
     private long userId;
-    @NotNull
     private String userName;
-    @NotNull
     private String displayName;
-    @NotNull
     private String password;
 
 }

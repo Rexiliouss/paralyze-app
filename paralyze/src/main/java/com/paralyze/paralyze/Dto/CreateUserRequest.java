@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 
+import javax.validation.constraints.Size;
+
 
 @Data
 @AllArgsConstructor
@@ -12,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
 public class CreateUserRequest {
     private long userId;
     @NotNull("Username cannot be null")
+    @Size(min = 3)
     private String userName;
     @NotNull("Displayname cannot be null")
     private String displayName;

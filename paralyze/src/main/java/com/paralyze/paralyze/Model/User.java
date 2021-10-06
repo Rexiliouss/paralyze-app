@@ -15,12 +15,8 @@ import javax.persistence.*;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
     private long userId;
-    @NotNull
     private String userName;
-    @NotNull
     private String displayName;
-    @NotNull
     private String password;
 }
