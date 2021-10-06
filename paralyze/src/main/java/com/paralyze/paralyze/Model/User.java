@@ -19,10 +19,4 @@ public class User {
     private String userName;
     private String displayName;
     private String password;
-
-    public User(String userName, String displayName, String password){
-        this.userName=userName;
-        this.displayName=displayName;
-        this.password=password;
-    }
 }
