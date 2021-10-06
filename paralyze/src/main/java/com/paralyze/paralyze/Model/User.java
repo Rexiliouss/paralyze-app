@@ -16,7 +16,10 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userId;
+    @NotNull
     private String userName;
+    @NotNull
     private String displayName;
+    @NotNull
     private String password;
 }
