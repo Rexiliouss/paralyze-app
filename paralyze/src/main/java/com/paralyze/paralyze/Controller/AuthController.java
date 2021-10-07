@@ -2,9 +2,7 @@ package com.paralyze.paralyze.Controller;
 
 import com.paralyze.paralyze.Exception.ApiError;
 import com.paralyze.paralyze.Service.UserService;
-import com.paralyze.paralyze.Shared.GenericResponse;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
