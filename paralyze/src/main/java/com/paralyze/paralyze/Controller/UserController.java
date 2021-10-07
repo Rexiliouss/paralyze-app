@@ -29,6 +29,8 @@ public class UserController {
         this.userService=userService;
     }
 
+
+
     //User Creator
     @PostMapping("/signup")
     public GenericResponse saveUser(@Valid @RequestBody User user){
@@ -36,13 +38,14 @@ public class UserController {
         return new GenericResponse("Kullanıcı oluşturuldu.");
     }
 
+
     //List All users
     @GetMapping("/allusers")
     public GenericResponse findAllUsers(){
         this.userService.findAllUsers();
         return new GenericResponse("Kullanıcılar Listelendi");
     }
-
+    /*
     //Exception
     @ExceptionHandler(HttpMessageNotReadableException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -60,5 +63,7 @@ public class UserController {
         }
         return new ApiError(HttpStatus.BAD_REQUEST,"Doğrulama Hatası","/api/v1/users",validationErrors);
     }
+    */
+
 
 }

@@ -24,5 +24,8 @@ public class UserService {
     public List<User> findAllUsers(){
         return userRepository.findAll();
     }
+    public Boolean login(String authToken){
+        return false;
+    }
 
 }
