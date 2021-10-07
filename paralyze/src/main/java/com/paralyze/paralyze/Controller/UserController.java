@@ -48,7 +48,7 @@ public class UserController {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiError handleValidationException(HttpMessageNotReadableException exception){
         Map<String, String> validationErrors = new HashMap<>();
-        validationErrors.put(exception.getLocalizedMessage(),exception.getMessage());
+        validationErrors.put(exception.getMessage(), exception.getLocalizedMessage());
         return new ApiError(HttpStatus.BAD_REQUEST,"Doğrulama Hatası","/api/v1/users",validationErrors);
     }
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -60,4 +60,5 @@ public class UserController {
         }
         return new ApiError(HttpStatus.BAD_REQUEST,"Doğrulama Hatası","/api/v1/users",validationErrors);
     }
+
 }

@@ -6,6 +6,8 @@ import lombok.*;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 
 @Entity
 @Getter
@@ -17,10 +19,14 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userId;
-    @NotNull
+    @NotNull(value = "Kullanıcı adı boş bırakılamaz")
+    @Size(min = 3, max = 255)
+    @Column(unique = true)
     private String userName;
-    @NotNull
+    @NotNull(value = "Rumuz boş bırakılamaz")
+    @Size(min = 3, max = 255)
     private String displayName;
-    @NotNull
+    @NotNull(value = "Şifre boş bırakılamaz")
+    @Size(min = 4, max = 255)
     private String password;
 }
