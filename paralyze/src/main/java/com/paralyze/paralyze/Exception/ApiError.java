@@ -21,4 +21,10 @@ public class ApiError {
         this.message=message;
         this.path=path;
     }
+    public ApiError(HttpStatus httpStatus, String message, String path, Map<String,String>validationErrors){
+        this.httpStatus=httpStatus;
+        this.message=message;
+        this.path=path;
+        this.validationErrors=validationErrors;
+    }
 }
