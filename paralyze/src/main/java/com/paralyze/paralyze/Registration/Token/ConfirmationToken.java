@@ -23,7 +23,7 @@ public class ConfirmationToken {
     private LocalDateTime createdAt;
     @Column(nullable = false)
     private LocalDateTime expiresAt;
-    private LocalDateTime confirmedAt;
+    //private LocalDateTime confirmedAt;
     @ManyToOne
     @JoinColumn(nullable = false,name = "paralyze_users_id")
     private ParalyzeUser paralyzeUser;
@@ -31,12 +31,10 @@ public class ConfirmationToken {
     public ConfirmationToken(String token,
                              LocalDateTime createdAt,
                              LocalDateTime expiresAt,
-                             LocalDateTime confirmedAt,
                              ParalyzeUser paralyzeUser) {
         this.token = token;
         this.createdAt = createdAt;
         this.expiresAt = expiresAt;
-        this.confirmedAt = confirmedAt;
         this.paralyzeUser=paralyzeUser;
     }
 }
