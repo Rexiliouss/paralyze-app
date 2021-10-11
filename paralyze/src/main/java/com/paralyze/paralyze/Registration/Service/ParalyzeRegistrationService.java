@@ -36,7 +36,4 @@ public class ParalyzeRegistrationService {
                 ParalyzeUserRole.USER
         ));
     }
-    public String confirmToken(String token){
-        return this.confirmationTokenService.getToken(token);
-    }
 }
